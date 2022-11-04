@@ -3,8 +3,9 @@
 //Global Variables
 int appWidth, appHeight ; 
 float imageBackgroundX, imageBackgroundY, imageBackgroundWidth, imageBackgroundHeight;
+PImage pic;
 //
-size(800, 600); //Landscape
+size(500, 100); //Landscape
 //Copy Display Orientation
 appWidth = width;
 appHeight = height;
@@ -19,4 +20,4 @@ imageBackgroundHeight = appHeight-1;
 //Rectangle Layout and Image drawing to CANVAS
 rect(imageBackgroundX, imageBackgroundY, imageBackgroundWidth, imageBackgroundHeight);
 //
-//image(pic, imageX, imageY, imageWidth, imageHeight);
+image(pic, imageBackgroundX, imageBackgroundY, imageBackgroundWidth, imageBackgroundHeight);
