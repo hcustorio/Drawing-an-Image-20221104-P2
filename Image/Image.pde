@@ -88,6 +88,8 @@ void draw()
 void keyPressed() {}//End keyPressed
 //
 void mousePressed() {
+  //
+  //Mouse Pressed will control background image
   if (mouseButton == LEFT) 
   nightMode = true;
   tint(255, 50); //Gray Scale: use 1/2 tint value for white (i.e. 128/256=1/2)
