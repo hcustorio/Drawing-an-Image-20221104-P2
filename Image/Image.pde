@@ -5,6 +5,8 @@ float picWidthAdjusted=0.0, picHeightAdjusted=0.0;
 float backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight;
 PImage pic;
 Boolean nightMode=false;
+int tintDayMode=255, tintDayModeOpacity=50;
+int tintRed=64, tintGreen=64, tintBlue=40, tintNightModeOpacity=85;
 //
 void setup()
 {
@@ -71,7 +73,8 @@ void setup()
   rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
   //
   //Background Image must be single executed code
-  if (nightMode == false) tint(255, 50); //Gray Scale: use 1/2 tint value for white (i.e. 128/256=1/2)
+  if (nightMode == false) tint(tintDayMode, tintDayModeOpacity); //Gray Scale: use 1/2 tint value for white (i.e. 128/256=1/2)
+  if (nightMode == true) tint(tintRed, tintGreen, tintBlue, tintNightModeOpacity); //RGB: Night Mode
   //image( pic, backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight);
   image( pic, backgroundImageX, backgroundImageY, picWidthAdjusted, picHeightAdjusted);
   //
@@ -89,15 +92,16 @@ void mousePressed() {
   //
   //Mouse Pressed will control background image
   if (mouseButton == LEFT) 
-  nightMode = true;
-  rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
-  tint(255, 50); //Gray Scale: use 1/2 tint value for white (i.e. 128/256=1/2)
-  //image( pic, backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight);
-  //
-  if (mouseButton == RIGHT) {
   nightMode = false;
   rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
-  tint(64, 64, 40, 85); //RGB: Night Mode
+  tint(tintDayMode, tintDayModeOpacity); //Gray Scale: use 1/2 tint value for white (i.e. 128/256=1/2)
+  //image( pic, backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight);
+  //
+  }
+  if (mouseButton == RIGHT) {
+  nightMode = true;
+  rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
+  tint(tintRed, tintGreen, tintBlue, tintNightModeOpacity); //RGB: Night Mode
   image( pic, backgroundImageX, backgroundImageY, picWidthAdjusted, picHeightAdjusted);
   }
 }//End mousePressed
