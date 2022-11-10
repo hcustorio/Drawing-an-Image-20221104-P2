@@ -8,7 +8,7 @@ Boolean nightMode=false;
 //
 void setup()
 {
-  size(1000, 800); //Landscape
+  size(800, 600); //Landscape
   //Copy Display Algorithm from Hello World
   appWidth = width;
   appHeight = height;
@@ -68,7 +68,7 @@ void setup()
   backgroundImageHeight = appHeight-1;
   //
   //Rectangular Layout and Image Drawing to CANVAS
-  //rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
+  rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
   //
   //Background Image must be single executed code
   if (nightMode == false) tint(255, 50); //Gray Scale: use 1/2 tint value for white (i.e. 128/256=1/2)
@@ -79,11 +79,9 @@ void setup()
 //
 void draw() 
 {
-  if (nightMode == true) {
-  tint(64, 64, 40); //RGB: Night Mode
-  image( pic, backgroundImageX, backgroundImageY, picWidthAdjusted, picHeightAdjusted);
+  
   }
-}//End draw
+
 //
 void keyPressed() {}//End keyPressed
 //
@@ -92,12 +90,14 @@ void mousePressed() {
   //Mouse Pressed will control background image
   if (mouseButton == LEFT) 
   nightMode = true;
+  rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
   tint(255, 50); //Gray Scale: use 1/2 tint value for white (i.e. 128/256=1/2)
   //image( pic, backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight);
   //
   if (mouseButton == RIGHT) {
   nightMode = false;
-  tint(64, 64, 40); //RGB: Night Mode
+  rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
+  tint(64, 64, 40, 85); //RGB: Night Mode
   image( pic, backgroundImageX, backgroundImageY, picWidthAdjusted, picHeightAdjusted);
   }
 }//End mousePressed
