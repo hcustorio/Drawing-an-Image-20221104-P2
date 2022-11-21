@@ -1,11 +1,11 @@
 //Global Variables
 int appWidth, appHeight;
-Boolean widthLarger=false, heightLarger=false;
-Boolean widthLarger2=false, heightLarger2=false;
-float picWidthAdjusted=0.0, picHeightAdjusted=0.0;
 float backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight;
+float picWidthAdjusted1=0.0, picHeightAdjusted1=0.0;
+float picWidthAdjusted2=0.0, picHeightAdjusted2=0.0;
+float picWidthAdjusted3=0.0, picHeightAdjusted3=0.0;
 float topHalfX, topHalfY, topHalfWidth, topHalfHeight;
-float bottomHalfX, bottomHalfY, bottomHalfWidth,bottomHalfHeight;
+float bottomHalfX, bottomHalfY, bottomHalfWidth, bottomHalfHeight;
 PImage pic, pic2, pic3;
 Boolean nightMode=false;
 int tintDayMode=255, tintDayModeOpacity=50;
@@ -13,76 +13,16 @@ int tintRed=64, tintGreen=64, tintBlue=40, tintNightModeOpacity=85;
 //
 void setup()
 {
-  size(800, 600); //Landscape
+  size(800, 500); //Landscape
   //Copy Display Algorithm from Hello World
+  //fullScreen(); //displayWidth, displayHeigth
   appWidth = width;
   appHeight = height;
   //
-  //Image Dimensions for Aspect Ratio 
-  //chipmunk-nature-photos-1537973822.jpg
-  //Note: Dimensions are found in the image file / Right Click / Properties / Details
-  int picWidth = 800;
-  int picHeight = 600;
-  int pic2Width = 1500; //landscape
-  int pic2Height = 1000; //landscape
-  //int pic3Width = ; //portrait
-  //int pic3Height = ; //portrait
-  //
-  float smallerDimension, largerDimension, smallerDimension2, largerDimension2;
-  //Image Orientation: Landscape, Portrait, Square
-  if ( picWidth >= picHeight ) { //True if Landscape or Square
-    largerDimension = picWidth;
-    smallerDimension = picHeight;
-    widthLarger = true;
-  } else { //False if Portrait
-    largerDimension = picHeight;
-    smallerDimension = picWidth;
-    heightLarger = true;
-  }
-  if ( pic2Width >= pic2Height ) { //True if Landscape or Square
-    largerDimension2 = pic2Width;
-    smallerDimension2 = pic2Height;
-    widthLarger2 = true;
-    //Landscape large Image to larger space OR smaller space 
-  } else { //False if Portrait
-    largerDimension2 = pic2Height;
-    smallerDimension2 = pic2Width;
-    heightLarger2 = true;
-  }
-  //
-   //Teaching example, width is known to be larger
-  float imageWidthRatio=0.0, imageHeightRatio=0.0;
-  //Better Iamge Stretch Algorithm, smaller image to larger CANVAS
-  if ( appWidth >= picWidth ) {
-    picWidthAdjusted = appWidth;
-    //
-    if ( widthLarger == true ) imageWidthRatio = largerDimension / largerDimension;
-    //
-    if ( appHeight >= picHeight ) {
-      if ( widthLarger == true ) imageWidthRatio = largerDimension / largerDimension;
-      picHeightAdjusted = picWidthAdjusted * imageHeightRatio;
-      if (appHeight <= picHeightAdjusted ) {
-        println("STOP: image is too big for CANVAS");
-        exit(); //stops any further use of APP
-        //Remember goal is 1:1 aspect ratio
-      }
-    } else {
-      //Image smalller than CANVAS nees separate algorithm
-    }
-  } else {
-    //Image smalller than CANVAS nees separate algorithm
-  }
-  //
-  //Verifying Variable Values after algorithm 
-  println("App Width:", appWidth, " and App Height:", appHeight);
-  println("Larger Image dimension is:", largerDimension);
-  println("Image dimensions are:", picWidth, picHeight);
-  println("Adjusted Image dimensions are(stretch is goal):", picWidthAdjusted, picHeightAdjusted);
-  //
   //Population
-  pic = loadImage("../Images Used/chipmunk-nature-photos-1537973822.jpg");
-  pic2 = loadImage("../Images Used/chipmunk-nature-photos-1537973822.jpg");
-  //pic3 = loadImage("../Images Used/chipmunk-nature-photos-1537973822.jpg");
+  pic = loadImage("../Images Used/Landscape/2017-09-26-09-53-54.jpg");
+  pic2 = loadImage("../Images Used/Landscape/chipmunk-nature-photos-1537973822.jpg");
+  pic3 = loadImage("../Images Used/Portrait/advicedog.jpg");
   backgroundImageX = appWidth*0;
   backgroundImageY = appHeight*0;
   backgroundImageWidth = appWidth-1;
@@ -90,48 +30,112 @@ void setup()
   topHalfX = appWidth * 1/4;
   topHalfY = appHeight * 1/20;
   topHalfWidth = appWidth * 1/2;
-  topHalfHeight = appHeight * 8/20;
-  bottomHalfX = appWidth * 1/2; 
-  bottomHalfY = appHeight * 3/4; 
+  topHalfHeight = appHeight * 13/20;
+  bottomHalfX = appWidth *1/2;
+  bottomHalfY = appHeight * 3/4;
   bottomHalfWidth = appWidth * 1/4;
   bottomHalfHeight = appHeight * 4/20;
+  //
+  //Image Dimensions for Aspect Ratio: image meta data
+  //Note: meta explored in MP3's or music files
+  //Note: Dimensions are found in the image file / Right Click / Properties / Details
+  int picWidth1 = 4013; //Kitten Landscape
+  int picHeight1 = 2585;
+  int picWidth2 = 1500; //Chipmunk Landscape
+  int picHeight2 = 1000;
+  int picWidth3 = 960; //Dog Portrait
+  int picHeight3 = 540;
+  //
+  //Image Orientation: Landscape, Portrait, Square
+  //Scaling Image size with aspect ratio requires larger dimension
+  float smallerDimension1, smallerDimension2, smallerDimension3;
+  float largerDimension1, largerDimension2, largerDimension3;
+  float imageWidthRatio1=0.0, imageHeightRatio1=0.0;
+  float imageWidthRatio2=0.0, imageHeightRatio2=0.0;
+  float imageWidthRatio3=0.0, imageHeightRatio3=0.0;
+  if ( picWidth1 >= picHeight1 ) { //True if Landscape or Square
+    largerDimension1 = picWidth1;
+    smallerDimension1 = picHeight1;
+    //
+    picWidthAdjusted1 = backgroundImageWidth; //from rect() layout
+    imageHeightRatio1 = smallerDimension1 / largerDimension1;
+    picHeightAdjusted1 = picWidthAdjusted1 * imageHeightRatio1;
+  } else { //False if Portrait
+    largerDimension1 = picHeight1;
+    smallerDimension1 = picWidth1;
+    //
+    picHeightAdjusted1 = backgroundImageHeight; //from rect() layout
+    imageWidthRatio1 = smallerDimension1 / largerDimension1;
+    picWidthAdjusted1 = picHeightAdjusted1 * imageWidthRatio1;
+  }
+  if ( picWidth2 >= picHeight2 ) { //True if Landscape or Square
+    largerDimension2 = picWidth2;
+    smallerDimension2 = picHeight2;
+    //
+    picWidthAdjusted2 = topHalfWidth; //from rect() layout
+    imageHeightRatio2 = smallerDimension2 / largerDimension2;
+    picHeightAdjusted2 = picWidthAdjusted2 * imageHeightRatio2;
+  } else { //False if Portrait
+    largerDimension2 = picHeight2;
+    smallerDimension2 = picWidth2;
+    //
+    picHeightAdjusted2 = topHalfHeight; //from rect() layout
+    imageWidthRatio2 = smallerDimension2 / largerDimension2;
+    picWidthAdjusted2 = picHeightAdjusted2 * imageWidthRatio2;
+  }
+  if ( picWidth3 >= picHeight3 ) { //True if Landscape or Square
+    largerDimension3 = picWidth3;
+    smallerDimension3 = picHeight3;
+    //
+    picWidthAdjusted3 = bottomHalfWidth; //from rect() layout
+    imageHeightRatio3 = smallerDimension3 / largerDimension3;
+    picHeightAdjusted3 = picWidthAdjusted3 * imageHeightRatio3;
+  } else { //False if Portrait
+    largerDimension3 = picHeight3;
+    smallerDimension3 = picWidth3;
+    //
+    picHeightAdjusted3 = bottomHalfHeight; //from rect() layout
+    imageWidthRatio3 = smallerDimension3 / largerDimension3;
+    picWidthAdjusted3 = picHeightAdjusted3 * imageWidthRatio3;
+  }
   //
   //Rectangular Layout and Image Drawing to CANVAS
   rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
   rect( topHalfX, topHalfY, topHalfWidth, topHalfHeight ); //Top Half
-  rect( bottomHalfX, bottomHalfY, bottomHalfWidth, bottomHalfHeight); //Bottom Half 
-  // 
+  rect( bottomHalfX, bottomHalfY, bottomHalfWidth, bottomHalfHeight ); //Bottom half
+  //
   //Background Image must be single executed code
-  if (nightMode == false) tint(tintDayMode, tintDayModeOpacity); //Gray Scale: use 1/2 tint value for white (i.e. 128/256=1/2)
-  if (nightMode == true) tint(tintRed, tintGreen, tintBlue, tintNightModeOpacity); //RGB: Night Mode
+  if ( nightMode == false ) tint(tintDayMode, tintDayModeOpacity); //Gray Scale: use 1/2 tint value for white (i.e. 128/256=1/2)
+  if ( nightMode == true ) tint(tintRed, tintGreen, tintBlue, tintNightModeOpacity); //RGB: Night Mode
   //image( pic, backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight);
-  image( pic, backgroundImageX, backgroundImageY, picWidthAdjusted, picHeightAdjusted);
+  image( pic, backgroundImageX, backgroundImageY, picWidthAdjusted1, picHeightAdjusted1);
   //
 }//End setup
 //
 void draw()
 {
-  image( pic2, topHalfX, topHalfY, topHalfWidth, topHalfHeight);
-  //image( pic3, bottomHalfX, bottomHalfY, bottomHalfWidth, bottomHalfHeight) ;
+  image( pic2, topHalfX, topHalfY, picWidthAdjusted2, picHeightAdjusted2 );
+  image( pic3, bottomHalfX, bottomHalfY, picWidthAdjusted3, picHeightAdjusted3 );
 }//End draw
 //
-void keyPressed() {}//End keyPressed
+void keyPressed() {
+}//End keyPressed
 //
 void mousePressed() {
   //
   //Mouse Pressed will control background image
   if (mouseButton == LEFT) {
-  nightMode = false;
-  rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
-  tint(tintDayMode, tintDayModeOpacity); //Gray Scale: use 1/2 tint value for white (i.e. 128/256=1/2)
-  //image( pic, backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight);
-  //
+    nightMode = false;
+    rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
+    tint(tintDayMode, tintDayModeOpacity); //Gray Scale: use 1/2 tint value for white (i.e. 128/256=1/2)
+    image( pic, backgroundImageX, backgroundImageY, picWidthAdjusted1, picHeightAdjusted1);
+    //
   }
   if (mouseButton == RIGHT) {
-  nightMode = true;
-  rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
-  tint(tintRed, tintGreen, tintBlue, tintNightModeOpacity); //RGB: Night Mode
-  image( pic, backgroundImageX, backgroundImageY, picWidthAdjusted, picHeightAdjusted);
+    nightMode = true;
+    rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
+    tint(tintRed, tintGreen, tintBlue, tintNightModeOpacity); //RGB: Night Mode
+    image( pic, backgroundImageX, backgroundImageY, picWidthAdjusted1, picHeightAdjusted1);
   }
 }//End mousePressed
 //
